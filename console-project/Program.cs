@@ -32,6 +32,8 @@ while(true)
         Console.Write("Type your edittask: ");
         String editTask = Console.ReadLine();
 
+        if (editTask == editTask)
+        {
         // 既存のタスクを参照する
         int indexNum = tasks.IndexOf(editTask);
         Console.Write("Type your edittext: ");
@@ -39,16 +41,29 @@ while(true)
         
         // 参照した値を変更する
         tasks[indexNum] = editText;
+        }
+
+        else
+        {
+            Console.Write("The information entered does not match the task");
+        }
 
     }
     // 削除コマンド
     else if (command == "remove")
     {
+        // タスクを削除
         Console.Write("Type your removetask: ");
         String removeTask = Console.ReadLine();
         tasks.Remove(removeTask);
-        // タスクを削除
 
+    }
+
+    else
+    {
+        Console.WriteLine("error");
+        Console.WriteLine("This command does not exist.");
+        Console.WriteLine("Please type a valid command.");
     }
 
 }
