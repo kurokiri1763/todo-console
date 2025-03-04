@@ -36,11 +36,11 @@ while(true)
         {
         // 既存のタスクを参照する
         int indexNum = tasks.IndexOf(editTask);
-        Console.Write("Type your edittext: ");
-        String editText = Console.ReadLine();
+        Console.Write("Type your newtext: ");
+        String newText = Console.ReadLine();
         
         // 参照した値を変更する
-        tasks[indexNum] = editText;
+        tasks[indexNum] = newText;
         }
 
         else
