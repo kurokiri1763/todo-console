@@ -1,5 +1,6 @@
 ﻿List<string> tasks = [];
 
+
 while(true)
 {
 // タスク表示コマンドを読み取る
@@ -31,21 +32,22 @@ while(true)
         // タスクを更新
         Console.Write("Type your edittask: ");
         String editTask = Console.ReadLine();
-
-        if (editTask == editTask)
-        {
         // 既存のタスクを参照する
         int indexNum = tasks.IndexOf(editTask);
-        Console.Write("Type your newtext: ");
-        String newText = Console.ReadLine();
-        
-        // 参照した値を変更する
-        tasks[indexNum] = newText;
+
+        if (indexNum == -1)
+        {
+            Console.WriteLine("Please enter a valid task");
         }
 
         else
         {
-            Console.Write("The information entered does not match the task");
+        Console.Write
+        ("Type your newtext: ");
+        String newText = Console.ReadLine();
+        
+        // 参照した値を変更する
+        tasks[indexNum] = newText;
         }
 
     }
