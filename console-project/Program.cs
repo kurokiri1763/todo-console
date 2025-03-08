@@ -1,4 +1,23 @@
-﻿List<string> tasks = [];
+﻿using System;
+
+class Program
+{
+    static void Main()
+    {
+        Database db = new Database();
+
+        // データベースを初期化
+        db.InitializeDatabase();
+
+        // タスクを追加
+            Console.Write("Type your newtask: ");
+            String newTask = Console.ReadLine();
+            db.AddTask(newTask);
+        }
+
+        // タスクを表示
+    }
+}
 
 void Display()
 {
@@ -9,13 +28,7 @@ void Display()
     }
 }
 
-void Add()
-{
-    // タスクを追加
-    Console.Write("Type your newtask: ");
-    String newTask = Console.ReadLine();
-    tasks.Add(newTask);
-}
+
 
 void Edit()
 {

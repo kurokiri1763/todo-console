@@ -1,3 +1,4 @@
+// データベースの管理クラス
 using System.Configuration;
 using System.Data.SQLite;
 
@@ -47,7 +48,6 @@ public class Database
     }
 
     // タスク一覧を取得
-
     public List<TaskObj> GetTask()
     {
         
