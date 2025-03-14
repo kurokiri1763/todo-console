@@ -1,13 +1,9 @@
 // データベースの管理クラス
+using System;
 using System.Configuration;
 using System.Data.SQLite;
 
-public class TaskObj
-{
-    public int Id { get; set; }
-    public string? Taskname { get; set; }
-    public DateTime Register { get; set; }
-}
+
 
 public class Database
 {
@@ -48,7 +44,7 @@ public class Database
     }
 
     // タスク一覧を取得
-    public List<TaskObj> GetTask()
+    public List<TaskObj> GetTasks()
     {
         
         List<TaskObj> tasks = new List<TaskObj>();
@@ -64,13 +60,44 @@ public class Database
                     
                     tasks.Add(new TaskObj
                     {
-                    Id = Convert.ToInt32(reader["Id"]),
-                    Taskname = reader["Taskname"].ToString(),
-                    Register = DateTime.Parse(reader["Register"].ToString())
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Taskname = reader["Taskname"].ToString(),
+                        Register = DateTime.Parse(reader["Register"].ToString())
                     });
                 }
             }
         }
         return tasks;
+    }
+
+    // タスクの編集
+    public void EditTask(int id, string taskname)
+    {
+        using (var connection = new SQLiteConnection(connectionString))
+        {
+            connection.Open();
+            string updateQuery = "UPDATE Task SET Taskname = @taskname WHERE Id = @id";
+            using (var command = new SQLiteCommand(updateQuery, connection))
+            {
+                command.Parameters.AddWithValue("@taskname", taskname);
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    // タスクの削除
+    public void DeleteTask(int id)
+    {
+        using (var connection = new SQLiteConnection(connectionString))
+        {
+            connection.Open();
+            string deleteQuery = "DELETE FROM Task WHERE Id = @id";
+            using (var command = new SQLiteCommand(deleteQuery, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
