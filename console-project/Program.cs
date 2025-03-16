@@ -5,6 +5,9 @@ class Program
 {
     static void Main()
     {
+        // sqlite3初期化
+        Batteries_V2.Init();
+
         Database db = new Database();
         // データベースを初期化
         db.InitializeDatabase();
@@ -75,9 +78,19 @@ class Program
     static void AddTask(Database db)
     {
         Console.Write("Enter new task name: ");
-        string taskname = Console.ReadLine();
+        string? taskname = Console.ReadLine();
+        
+        if (string.IsNullOrWhiteSpace(taskname))
+        {
+            Console.WriteLine("❌Task name cannot be empty. Please enter a valid task name.");
+            return;
+        }
+
+        else
+        {
         db.AddTask(taskname);
         Console.WriteLine("✅Task added successfully.");
+        }
     }
 
     // タスクを編集する

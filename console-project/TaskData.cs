@@ -17,8 +17,8 @@ public class Database
             connection.Open();
             string createTableQuery = @"
                 CREATE TABLE IF NOT EXISTS Task(
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT
-                    Taskname TEXT NOT NULL
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Taskname TEXT NOT NULL,
                     Register DATETIME DEFAULT CURRENT_TIMESTAMP 
                 );";
             using (var command = new SQLiteCommand(createTableQuery, connection))
@@ -62,7 +62,9 @@ public class Database
                     {
                         Id = Convert.ToInt32(reader["Id"]),
                         Taskname = reader["Taskname"].ToString(),
-                        Register = DateTime.Parse(reader["Register"].ToString())
+                        Register = reader["Register"] != DBNull.Value
+                        ? DateTime.Parse(reader["Register"].ToString())
+                        : DateTime.MinValue  
                     });
                 }
             }
